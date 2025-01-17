@@ -95,6 +95,3 @@ Spot2Vector.Clustering(adata, obsm_data='embeddings', method = 'mclust', n_clust
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-We thank the developers of Scanpy and other open-source tools that made this work possible. Special thanks to the contributors of the AnnData library for providing a flexible data structure for single-cell and spatial transcriptomics data.
