@@ -73,7 +73,7 @@ device = 'cuda:0'  # Specify the GPU device
 Spot2Vector.Fit(adata, device=device)
 ```
 ### 4. Spatial Clustering (Spatial & Expression)
-Perform spatial clustering using both the expression embeddings and spatial embeddings:
+Perform spatial clustering using both the expression embeddings and spatial embeddings. The `n_clusters` parameter specifies the number of spatial domains, and users need to provide this value based on their dataset and biological knowledge.
 ```python
 # Expression embeddings
 Spot2Vector.Clustering(adata, obsm_data='exp_embeddings', method='mclust', n_cluster=n_clusters, verbose=False)
