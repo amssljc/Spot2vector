@@ -44,15 +44,16 @@ The input data for Spot2vector should be an `AnnData` object, which can be loade
   sc.pp.log1p(adata)
 
   # Select highly variable genes
- sc.pp.highly_variable_genes(adata, n_top_genes=8000, flavor='seurat_v3')
+  sc.pp.highly_variable_genes(adata, n_top_genes=8000, flavor='seurat_v3')
   ```
+
 - **Spatial coordinates** stored in `adata.obsm["spatial"]`.
 - Optional PCA for improved graph construction efficiency:
-```
-sc.pp.pca(adata, n_comps=10)
-```python
+  ```python
+  sc.pp.pca(adata, n_comps=10)
+  ```
 
-2. Graph construction
+### 2. Graph construction
 Construct spatial and expression graphs:
 ```python
 import Spot2Vector
@@ -61,13 +62,13 @@ Spot2Vector.Build_Graph(adata, radius_cutoff=150, cutoff_type='radius', graph_ty
 # Expression graph based on expression similarity
 Spot2Vector.Build_Graph(adata, neighbors_cutoff=4, cutoff_type='neighbors', graph_type='expression')
 ```
-3. Model training
+### 3. Model training
 Train the model:
 ```python
 device = 'cuda:0'
 Spot2Vector.Fit(adata, device=device)
 ```
-4. Spatial clustering (spatial & expression)
+### 4. Spatial clustering (spatial & expression)
 Cluster using expression and spatial embeddings:
 ```python
 # Expression embeddings
@@ -75,17 +76,17 @@ Spot2Vector.Clustering(adata, obsm_data='exp_embeddings', method='mclust', n_clu
 # Spatial embeddings
 Spot2Vector.Clustering(adata, obsm_data='spa_embeddings', method='mclust', n_cluster=n_clusters, verbose=False)
 ```
-5. Model inference
+### 5. Model inference
 Obtain final embeddings:
 ```python
 # lamda = 1 for expression, lamda = 0 for spatial
 Spot2Vector.Infer(adata, lamda=0.2, device=device)
 ```
-6. Spatial clustering (final embeddings)
+### 6. Spatial clustering (final embeddings)
 Cluster using final embeddings:
 ```python
 Spot2Vector.Clustering(adata, obsm_data='embeddings', method = 'mclust', n_cluster=n_clusters, verbose=False)
 ```
 
-License
+## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
