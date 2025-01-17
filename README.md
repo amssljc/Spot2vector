@@ -30,7 +30,9 @@ For detailed installation instructions, please refer to [INSTALLATION.md](INSTAL
 
 
 ## Quick Start
+
 ### 1. Data Preparation
+
 The input data for Spot2vector should be an `AnnData` object, which can be loaded using `scanpy.read_h5ad`. The `AnnData` object must contain:
 
 - **Preprocessed Expression Data**: The expression data should be preprocessed using standard single-cell RNA-seq preprocessing steps:
@@ -47,46 +49,52 @@ The input data for Spot2vector should be an `AnnData` object, which can be loade
   sc.pp.highly_variable_genes(adata, n_top_genes=8000, flavor='seurat_v3')
   ```
 
-- **Spatial coordinates** stored in `adata.obsm["spatial"]`.
-- Optional PCA for improved graph construction efficiency:
+- **Spatial coordinates**: The spatial coordinates should be stored in `adata.obsm["spatial"]`. The coordinates should be a 2D array of shape `(n_spots, 2)`.
+- **Optional PCA**: For improved efficiency in constructing the expression similarity graph, you can perform PCA to obtain a low-dimensional representation: 
   ```python
   sc.pp.pca(adata, n_comps=10)
   ```
 
-### 2. Graph construction
-Construct spatial and expression graphs:
+### 2. Graph Construction
+Construct spatial and expression graphs using the following commands:
 ```python
 import Spot2Vector
+
 # Spatial graph based on spatial coordinates
 Spot2Vector.Build_Graph(adata, radius_cutoff=150, cutoff_type='radius', graph_type='spatial')
+
 # Expression graph based on expression similarity
 Spot2Vector.Build_Graph(adata, neighbors_cutoff=4, cutoff_type='neighbors', graph_type='expression')
 ```
-### 3. Model training
-Train the model:
+### 3. Model Training
+Train the model using the following command:
 ```python
-device = 'cuda:0'
+device = 'cuda:0'  # Specify the GPU device
 Spot2Vector.Fit(adata, device=device)
 ```
-### 4. Spatial clustering (spatial & expression)
-Cluster using expression and spatial embeddings:
+### 4. Spatial Clustering (Spatial & Expression)
+Perform spatial clustering using both the expression embeddings and spatial embeddings:
 ```python
 # Expression embeddings
 Spot2Vector.Clustering(adata, obsm_data='exp_embeddings', method='mclust', n_cluster=n_clusters, verbose=False)
+
 # Spatial embeddings
 Spot2Vector.Clustering(adata, obsm_data='spa_embeddings', method='mclust', n_cluster=n_clusters, verbose=False)
 ```
-### 5. Model inference
-Obtain final embeddings:
+### 5. Model Inference
+Perform model inference to obtain the final embeddings:
 ```python
 # lamda = 1 for expression, lamda = 0 for spatial
 Spot2Vector.Infer(adata, lamda=0.2, device=device)
 ```
-### 6. Spatial clustering (final embeddings)
-Cluster using final embeddings:
+### 6. Spatial Clustering (Final Embeddings)
+Perform the final spatial clustering using the combined embeddings:
 ```python
 Spot2Vector.Clustering(adata, obsm_data='embeddings', method = 'mclust', n_cluster=n_clusters, verbose=False)
 ```
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+We thank the developers of Scanpy and other open-source tools that made this work possible. Special thanks to the contributors of the AnnData library for providing a flexible data structure for single-cell and spatial transcriptomics data.
