@@ -100,3 +100,14 @@
     pip install --user scikit-misc
     ```
 ### 3. Setup Spot2Vector
+
+
+1. Clone the repositor
+   ```
+   git clone https://github.com/amssljc/Spot2vector.git
+   cd Spot2vector
+   ```
+2. Install the package
+   ```
+   pip install -e .
+   ```
