@@ -2,7 +2,7 @@
 
 Spot2vector is a novel computational framework that leverages a ZINB-based graph autoencoder for spatial clustering and data denoising. This method integrates both spatial and expression information to provide a comprehensive analysis of spatial transcriptomics (ST) data.
 
-[![Hits](https://hits.sh/github.com/amssljc/Spot2vector.svg)](https://github.com/amssljc/Spot2vector)
+[![Honorable visitors](https://hits.sh/github.com/amssljc/Spot2vector.svg)](https://github.com/amssljc/Spot2vector)
 
 ## Authors
 
