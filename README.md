@@ -11,7 +11,7 @@ Spot2vector is a novel computational framework that leverages a ZINB-based graph
 ## Pipeline
 
 <p align="center">
-  <a href="https://github.com/amssljc/Spot2vector/">
+  <a href="https://github.com/amssljc/spot2vector/">
     <img src="image/Spot2vector.svg" alt="Logo">
   </a>
 </p>
@@ -58,39 +58,39 @@ The input data for Spot2vector should be an `AnnData` object, which can be loade
 ### 2. Graph Construction
 Construct spatial and expression graphs using the following commands:
 ```python
-import Spot2Vector
+import spot2vector
 
 # Spatial graph based on spatial coordinates
-Spot2Vector.Build_Graph(adata, radius_cutoff=150, cutoff_type='radius', graph_type='spatial')
+spot2vector.Build_Graph(adata, radius_cutoff=150, cutoff_type='radius', graph_type='spatial')
 
 # Expression graph based on expression similarity
-Spot2Vector.Build_Graph(adata, neighbors_cutoff=4, cutoff_type='neighbors', graph_type='expression')
+spot2vector.Build_Graph(adata, neighbors_cutoff=4, cutoff_type='neighbors', graph_type='expression')
 ```
 ### 3. Model Training
 Train the model using the following command:
 ```python
 device = 'cuda:0'  # Specify the GPU device
-Spot2Vector.Fit(adata, device=device)
+spot2vector.Fit(adata, device=device)
 ```
 ### 4. Spatial Clustering (Spatial & Expression)
 Perform spatial clustering using both the expression embeddings and spatial embeddings. The `n_clusters` parameter specifies the number of spatial domains, and users need to provide this value based on their dataset and biological knowledge.
 ```python
 # Expression embeddings
-Spot2Vector.Clustering(adata, obsm_data='exp_embeddings', method='mclust', n_cluster=n_clusters, verbose=False)
+spot2vector.Clustering(adata, obsm_data='exp_embeddings', method='mclust', n_cluster=n_clusters, verbose=False)
 
 # Spatial embeddings
-Spot2Vector.Clustering(adata, obsm_data='spa_embeddings', method='mclust', n_cluster=n_clusters, verbose=False)
+spot2vector.Clustering(adata, obsm_data='spa_embeddings', method='mclust', n_cluster=n_clusters, verbose=False)
 ```
 ### 5. Model Inference
 Perform model inference to obtain the final embeddings:
 ```python
 # lamda = 1 for expression, lamda = 0 for spatial
-Spot2Vector.Infer(adata, lamda=0.2, device=device)
+spot2vector.Infer(adata, lamda=0.2, device=device)
 ```
 ### 6. Spatial Clustering (Final Embeddings)
 Perform the final spatial clustering using the combined embeddings:
 ```python
-Spot2Vector.Clustering(adata, obsm_data='embeddings', method = 'mclust', n_cluster=n_clusters, verbose=False)
+spot2vector.Clustering(adata, obsm_data='embeddings', method = 'mclust', n_cluster=n_clusters, verbose=False)
 ```
 
 ## License
