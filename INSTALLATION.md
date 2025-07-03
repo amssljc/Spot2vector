@@ -101,7 +101,11 @@
     ```
 ### 3. Setup spot2vector
 
-
+- One line command:
+    ```
+    pip install spot2vector
+    ```
+OR
 1. Clone the repositor
    ```
    git clone https://github.com/amssljc/Spot2vector.git
@@ -110,11 +114,4 @@
 2. Install the package
    ```
    pip install -e .
-   ```
-
-or directly from Pypi:
-
-
-   ```
-   pip install spot2vector
    ```
