@@ -2,6 +2,7 @@
 
 Spot2vector is a novel computational framework that leverages a ZINB-based graph autoencoder for spatial clustering and data denoising. This method integrates both spatial and expression information to provide a comprehensive analysis of spatial transcriptomics (ST) data.
 
+[![PyPI Downloads](https://static.pepy.tech/badge/spot2vector/week)](https://pepy.tech/projects/spot2vector) ![PyPI - Version](https://img.shields.io/pypi/v/spot2vector?color=red)
 ## Authors
 
 - amssljc@163.com
